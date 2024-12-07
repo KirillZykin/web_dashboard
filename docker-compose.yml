@@ -24,8 +24,8 @@ services:
     networks:
       - app-network
 
-  website:
-    build: ./api_website
+  api:
+    build: api
     container_name: website_container
     networks:
       - app-network
@@ -34,8 +34,8 @@ services:
     depends_on:
       - db
 
-  chat:
-    build: ./api_chat
+  fronted:
+    build: frontend
     container_name: chat_container
     networks:
       - app-network
