@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
 # SQLite database URL
-DATABASE_URL = "postgresql://my_user:pass@db:5432/web_database"
+DATABASE_URL = "postgresql://postgres:53227172@localhost/students_db"
 
 engine = create_engine(DATABASE_URL)
 
@@ -18,19 +18,12 @@ def get_db():
     finally:
         db.close()
 
-class User(Base):
-    __tablename__ = "users"
-    
+class Student(Base):
+    __tablename__ = "students"
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    chats = relationship("Chat", back_populates="owner")
-
-class Chat(Base):
-    __tablename__ = "chats"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True, nullable=False)
-    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    
-    owner = relationship("User", back_populates="chats")
+    last_name = Column(String, index=True)
+    first_name = Column(String, index=True)
+    middle_name = Column(String, index=True)
+    course = Column(Integer, index=True)
+    group = Column(String, index=True)
+    faculty = Column(String, index=True)
