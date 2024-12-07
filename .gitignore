@@ -3,3 +3,5 @@ env
 .idea
 db/dump
 *.log
+/fronted/node_modules/
+/fronted/build/
