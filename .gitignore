@@ -1,7 +1,7 @@
 __pycache__
 env
 .idea
-db/dump
 *.log
 /fronted/node_modules/
 /fronted/build/
+/db/dump/
