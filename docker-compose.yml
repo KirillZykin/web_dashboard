@@ -1,16 +1,4 @@
 services:
-#  nginx:
-#    build: fronted/nginx
-#    container_name: nginx
-#    ports:
-#      - "80:80"
-#    networks:
-#      - app-network
-#    depends_on:
-#      - website
-#      - chat
-#    volumes:
-#      - ./nginx/logs:/var/log/nginx
 
   db:
     image: postgres:14
@@ -21,14 +9,10 @@ services:
       POSTGRES_DB: db_students
     volumes:
       - ./db/dump:/var/lib/postgresql/data
-#    networks:
-#      - app-network
 
   api:
     build: api
     container_name: api
-#    networks:
-#      - app-network
     ports:
       - "3000:8000"
     environment:
@@ -45,11 +29,6 @@ services:
       - "80:80"
     depends_on:
       - api
-
-#
-#networks:
-#  app-network:
-#    driver: bridge
 
 volumes:
   dump:
