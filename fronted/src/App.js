@@ -11,11 +11,13 @@ const App = () => {
 
   const fetchStudents = async (page, size) => {
     try {
+      const skip = (page - 1) * size; // Смещение
       const response = await axios.get(
-          `http://localhost:8000/students?page=${page}&size=${size}`
+          `http://127.0.0.1:3000/students?skip=${skip}&limit=${size}`
       );
-      setStudents(response.data.students);
-      setTotalPages(response.data.totalPages);
+      setStudents(response.data); // Предполагается, что API возвращает массив студентов
+      // Замените `100` на общее количество записей, возвращаемое API
+      setTotalPages(Math.ceil(100 / size));
     } catch (error) {
       console.error("Ошибка при загрузке данных:", error);
     }
@@ -30,13 +32,20 @@ const App = () => {
         <h1>Список студентов</h1>
         <label>
           Размер страницы:
-          <select value={pageSize} onChange={(e) => setPageSize(Number(e.target.value))}>
+          <select
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+          >
             <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={15}>15</option>
           </select>
         </label>
-        <StudentTable students={students} />
+        {students.length === 0 ? (
+            <p>Нет данных для отображения.</p>
+        ) : (
+            <StudentTable students={students} />
+        )}
         <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

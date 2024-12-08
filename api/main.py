@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
 
 from database import Student, get_db, Base, engine
 from orm import StudentBase, StudentResponse
@@ -8,6 +9,14 @@ from orm import StudentBase, StudentResponse
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1"],  # Разрешаем запросы с фронтенда
+    allow_credentials=True,
+    allow_methods=["*"],  # Разрешаем все методы (GET, POST и т.д.)
+    allow_headers=["*"],  # Разрешаем все заголовки
+)
 
 # Эндпоинт для получения списка студентов с пагинацией
 @app.get("/students", response_model=List[StudentResponse])
