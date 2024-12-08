@@ -16,16 +16,22 @@ const StudentTable = ({ students }) => {
             </tr>
             </thead>
             <tbody>
-            {students.map((student, index) => (
-                <tr key={index}>
-                    <td>{student.lastName}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.middleName}</td>
-                    <td>{student.course}</td>
-                    <td>{student.group}</td>
-                    <td>{student.faculty}</td>
+            {students && students.length > 0 ? (
+                students.map((student, index) => (
+                    <tr key={index}>
+                        <td>{student.last_name}</td>
+                        <td>{student.first_name}</td>
+                        <td>{student.middle_name}</td>
+                        <td>{student.course}</td>
+                        <td>{student.group}</td>
+                        <td>{student.faculty}</td>
+                    </tr>
+                ))
+            ) : (
+                <tr>
+                    <td colSpan="6">Нет данных</td>
                 </tr>
-            ))}
+            )}
             </tbody>
         </table>
     );
