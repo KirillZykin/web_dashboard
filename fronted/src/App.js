@@ -15,9 +15,8 @@ const App = () => {
       const response = await axios.get(
           `http://127.0.0.1:3000/students?skip=${skip}&limit=${size}`
       );
-      setStudents(response.data); // Предполагается, что API возвращает массив студентов
-      // Замените `100` на общее количество записей, возвращаемое API
-      setTotalPages(Math.ceil(100 / size));
+      setStudents(response.data);
+      setTotalPages(Math.ceil(40 / size));
     } catch (error) {
       console.error("Ошибка при загрузке данных:", error);
     }

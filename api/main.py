@@ -28,7 +28,7 @@ def get_students(
     students = db.query(Student).offset(skip).limit(limit).all()
     return students
 
-# Заполнение тестовыми данными (опционально)
+# Заполнение тестовыми данными
 @app.post("/students/populate")
 def populate_students(db: Session = Depends(get_db)):
     test_data = [
